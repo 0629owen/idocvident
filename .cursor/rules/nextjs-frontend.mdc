@@ -1,0 +1,29 @@
+---
+description: Frontend and App Router conventions for idocvident
+globs: src/**/*.tsx, src/**/*.ts
+alwaysApply: false
+---
+
+# Frontend conventions
+
+## Structure
+
+- Use the App Router (`src/app/`), not the Pages Router
+- Server Components by default; add `"use client"` only when needed (hooks, browser APIs, event handlers)
+- Colocate route-specific code under `src/app/`; shared UI under `src/components/` when it grows
+
+## Styling
+
+- Use Tailwind utility classes; follow patterns in `src/app/page.tsx` and `src/app/globals.css`
+- Support light and dark mode where the rest of the page does
+
+## Components
+
+- Use TypeScript with explicit props types
+- Prefer named exports for reusable components
+- Use `next/image` for images and `next/link` for internal navigation
+
+## Reference
+
+- Default home page: @src/app/page.tsx
+- Root layout: @src/app/layout.tsx

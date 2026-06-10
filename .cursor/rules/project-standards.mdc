@@ -1,0 +1,32 @@
+---
+description: Team-wide conventions for the idocvident project
+alwaysApply: true
+---
+
+# idocvident — team standards
+
+## Project
+
+- Next.js 16 App Router app with TypeScript, Tailwind CSS v4, and ESLint
+- Source lives under `src/`; pages and layouts under `src/app/`
+- Project name: **idocvident**
+
+## How we work
+
+- Keep changes focused; avoid unrelated refactors in the same PR
+- Run `npm run lint` before opening a PR
+- Prefer small, reviewable commits with clear messages
+- Never commit secrets (`.env`, API keys, credentials)
+
+## Agent behavior
+
+- Read existing code before adding new patterns
+- Match naming, imports, and file layout already in the repo
+- For Next.js APIs, check `node_modules/next/dist/docs/` when unsure — this template may differ from older Next.js versions
+- Ask before large architectural changes or new dependencies
+
+## Collaboration
+
+- Pull latest `main` before starting work: `git pull origin main`
+- Use feature branches: `git checkout -b feature/short-description`
+- Open a PR for review; do not push directly to `main` once teammates are active
