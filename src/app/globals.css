@@ -2,13 +2,13 @@
 
 :root {
   --background: #ffffff;
-  --foreground: #1f1a33;
-  --green-50: #faf5ff;
-  --green-100: #f3e8ff;
-  --green-500: #a855f7;
-  --green-600: #9333ea;
-  --green-700: #7e22ce;
-  --muted: #6b6580;
+  --foreground: #1a2e24;
+  --green-50: #f3faf6;
+  --green-100: #e3f2ea;
+  --green-500: #2d8f5c;
+  --green-600: #1b7a4e;
+  --green-700: #15603e;
+  --muted: #5c6f65;
 }
 
 @theme inline {
