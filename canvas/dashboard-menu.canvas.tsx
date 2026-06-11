@@ -301,7 +301,7 @@ export default function DashboardMenu() {
         )}
       >
         <Stack gap={4}>
-          <H3 style={{ margin: 0, padding: "0 10px" }}>Acme Console</H3>
+          <H3 style={{ margin: 0, padding: "0 10px" }}>Console</H3>
           <Text tone="tertiary" size="small" style={{ padding: "0 10px" }}>
             Workspace dashboard
           </Text>
