@@ -103,6 +103,22 @@ export default function App() {
     document.getElementById("section-detail")?.scrollIntoView({ behavior: "smooth" });
   };
 
+  const activeIndex = SECTIONS.findIndex(({ id }) => id === active);
+
+  const goToSlide = (index: number) => {
+    const section = SECTIONS[index];
+    if (!section) return;
+    document.getElementById(section.id)?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  const goToPrevSlide = () => {
+    if (activeIndex > 0) goToSlide(activeIndex - 1);
+  };
+
+  const goToNextSlide = () => {
+    if (activeIndex < SECTIONS.length - 1) goToSlide(activeIndex + 1);
+  };
+
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -124,16 +140,42 @@ export default function App() {
 
   return (
     <>
-      <nav className="nav-dots" aria-label="Slide navigation">
-        {SECTIONS.map(({ id, label }) => (
-          <a key={id} href={`#${id}`} aria-label={label}>
-            <button
-              type="button"
-              className={`nav-dot${active === id ? " active" : ""}`}
-              aria-current={active === id ? "true" : undefined}
-            />
-          </a>
-        ))}
+      <nav className="slide-nav" aria-label="Slide navigation">
+        <button
+          type="button"
+          className="slide-arrow"
+          onClick={goToPrevSlide}
+          disabled={activeIndex <= 0}
+          aria-label="Previous slide"
+        >
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M12 16l-6-6h12l-6 6z" />
+          </svg>
+        </button>
+
+        <div className="nav-dots">
+          {SECTIONS.map(({ id, label }) => (
+            <a key={id} href={`#${id}`} aria-label={label}>
+              <button
+                type="button"
+                className={`nav-dot${active === id ? " active" : ""}`}
+                aria-current={active === id ? "true" : undefined}
+              />
+            </a>
+          ))}
+        </div>
+
+        <button
+          type="button"
+          className="slide-arrow"
+          onClick={goToNextSlide}
+          disabled={activeIndex >= SECTIONS.length - 1}
+          aria-label="Next slide"
+        >
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M12 8l6 6H6l6-6z" />
+          </svg>
+        </button>
       </nav>
 
       <main className="presentation">
@@ -141,10 +183,9 @@ export default function App() {
           <div className="slide-inner">
             <div className="hero-logo">iDoc</div>
             <span className="badge">Internal proposal</span>
-            <h1>Replace Evident.<br />Build what your lab actually needs.</h1>
+            <h1>Replace Evident.<br />Build iDoc.</h1>
             <p className="lead">
-              A custom dental lab platform shaped to streamline workflows, cut operating
-              costs, and improve overall efficiency across your entire operation.
+              A custom lab platform — lower cost, faster workflows, built around how your team actually works.
             </p>
             <div className="pill-list">
               <span className="pill">Lower monthly cost</span>
@@ -160,26 +201,23 @@ export default function App() {
             <span className="badge">The problem</span>
             <h2>Evident gets in the way</h2>
             <p className="lead">
-              Across every department, the same themes came up: slow performance, lost work,
-              limited flexibility, and rising costs as features get bolted on.
+              Every department raised the same issues: slow, unreliable, inflexible — and getting more expensive.
             </p>
             <div className="grid-2">
               <div className="card">
                 <h3>Reliability & speed</h3>
                 <ul>
                   <li>Kicks users out and loses unsaved work</li>
-                  <li>Slow website disrupts daily tasks</li>
-                  <li>Security concerns after past incidents</li>
+                  <li>Slow performance disrupts daily tasks</li>
                   <li>No undo — mistakes are hard to reverse</li>
                 </ul>
               </div>
               <div className="card">
                 <h3>Workflow friction</h3>
                 <ul>
-                  <li>Case intake missing info before work starts</li>
-                  <li>Remakes lack communication trail</li>
+                  <li>Cases start with missing info</li>
+                  <li>Remakes lack a clear communication trail</li>
                   <li>Government vs. private cases poorly divided</li>
-                  <li>Production staff find computers “in the way”</li>
                 </ul>
               </div>
               <div className="card">
@@ -187,17 +225,15 @@ export default function App() {
                 <ul>
                   <li>Inaccurate sales reports (especially cash)</li>
                   <li>Hard to apply payments across invoices</li>
-                  <li>Statement rules differ by customer type</li>
-                  <li>Monthly reporting still needs heavy Excel cleanup</li>
+                  <li>Monthly reports still need Excel cleanup</li>
                 </ul>
               </div>
               <div className="card">
                 <h3>Unused & outdated</h3>
                 <ul>
-                  <li>Doctor portals rarely used vs. phone calls</li>
-                  <li>Materials stock tracking not in use</li>
-                  <li>Many reports generated but seldom referenced</li>
-                  <li>Features teams don’t touch pile up anyway</li>
+                  <li>Doctor portals rarely used</li>
+                  <li>Reports and features teams don’t touch</li>
+                  <li>Rising fees for tools nobody needs</li>
                 </ul>
               </div>
             </div>
@@ -209,26 +245,24 @@ export default function App() {
             <span className="badge">Cost benefit</span>
             <h2>Pay less. Own more.</h2>
             <p className="lead">
-              Evident costs keep climbing as AI and add-ons expand. An internal iDoc platform
-              flips that trend — hosted on modern infrastructure you control.
+              Evident fees climb with every add-on. iDoc runs on infrastructure you control — at a fraction of the cost.
             </p>
             <div className="stat-row">
               <div className="stat">
                 <div className="stat-value warning">$1,500+</div>
-                <div className="stat-label">Evident base cost / month + extras</div>
+                <div className="stat-label">Evident / month + extras</div>
               </div>
               <div className="stat">
                 <div className="stat-value warning">Up to $2,000</div>
-                <div className="stat-label">With Evident’s photo AI feature added</div>
+                <div className="stat-label">With photo AI add-on</div>
               </div>
               <div className="stat">
                 <div className="stat-value success">~$100</div>
-                <div className="stat-label">iDoc estimate — Vercel, Supabase, email, AI tools</div>
+                <div className="stat-label">iDoc / month (hosting + tools)</div>
               </div>
             </div>
             <p className="quote">
-              “As Evident adds features, the price keeps rising. When we build internally,
-              we choose what to change — and costs stay under our control.”
+              Build internally — choose what changes, keep costs under control.
             </p>
           </div>
         </section>
@@ -238,44 +272,25 @@ export default function App() {
             <span className="badge">Customer Service</span>
             <h2>Faster intake. Smarter archives.</h2>
             <p className="lead">
-              CS needs full case history for remakes years later — but not everything forever.
-              iDoc archives by warranty while keeping what matters searchable.
+              Full case history when remakes need it — archived by warranty, always searchable.
             </p>
             <div className="grid-2">
               <div className="card">
-                <h3>Case intake</h3>
+                <h3>Case intake &amp; communication</h3>
                 <ul>
-                  <li>Pop-up quick entry with copy &amp; fast-add</li>
-                  <li>Auto product codes → crown, bridge, denture, etc.</li>
-                  <li>Government / private indicators on every product</li>
-                  <li>Link scan program → auto-create new cases</li>
+                  <li>Quick entry, auto product codes, scan → new case</li>
+                  <li>Separate internal vs. doctor-visible notes</li>
+                  <li>Remake &amp; clone with teeth diagram check</li>
+                  <li>File uploads with shareable links for offices</li>
                 </ul>
               </div>
               <div className="card">
-                <h3>Communication</h3>
+                <h3>Search, history &amp; automation</h3>
                 <ul>
-                  <li>Separate notes: internal iDoc vs. doctor-visible</li>
-                  <li>Upload files → shareable link for dental offices</li>
-                  <li>Remake &amp; clone buttons with teeth diagram check</li>
-                  <li>See who last changed a case</li>
-                </ul>
-              </div>
-              <div className="card">
-                <h3>Search &amp; history</h3>
-                <ul>
-                  <li>Keep fuzzy name search (%abc%) &amp; patient tracking</li>
-                  <li>Recent cases view + full archived history</li>
-                  <li>Organize by warranty status</li>
-                  <li>Complaint log with purpose beyond just closing tickets</li>
-                </ul>
-              </div>
-              <div className="card">
-                <h3>Automation</h3>
-                <ul>
+                  <li>Fuzzy search, patient tracking, warranty-based archive</li>
                   <li>Auto-save everywhere — no more lost work</li>
-                  <li>Tax rules updatable when policy changes</li>
-                  <li>Calendar blocks holidays &amp; working days</li>
-                  <li>Dental office logins to view their own cases &amp; tracking</li>
+                  <li>Doctor logins to view cases &amp; tracking</li>
+                  <li>Tax rules &amp; calendar updates when policy changes</li>
                 </ul>
               </div>
             </div>
@@ -287,44 +302,25 @@ export default function App() {
             <span className="badge">Finance</span>
             <h2>Reports that match reality.</h2>
             <p className="lead">
-              Angie’s workflow — aged balances, credits, collections, statements — shouldn’t
-              need a spreadsheet rescue every month.
+              Aged balances, collections, and statements — ready to use, not fixed in Excel every month.
             </p>
             <div className="grid-2">
               <div className="card">
                 <h3>Invoicing &amp; payments</h3>
                 <ul>
-                  <li>Invoice &amp; lab ticket share one print/login flow</li>
+                  <li>Invoice &amp; lab ticket in one print flow</li>
                   <li>Apply payments without hunting invoice numbers</li>
-                  <li>Autopay reminders for card-on-file accounts</li>
-                  <li>Credit limits → COD terms when needed</li>
-                </ul>
-              </div>
-              <div className="card">
-                <h3>Reports Angie actually uses</h3>
-                <ul>
-                  <li>Aged balances — clean, no negatives, ready by the 20th</li>
-                  <li>Detailed credit reports (product + sales tax split)</li>
-                  <li>Collections split: Private / PDS / Government</li>
-                  <li>Product activity for sales tax — accurate cash handling</li>
-                </ul>
-              </div>
-              <div className="card">
-                <h3>Statements per customer type</h3>
-                <ul>
-                  <li>PDS: detailed — products under each invoice</li>
-                  <li>Schools, labs, private: summary option</li>
-                  <li>Per-office email rules (Wisconsin vs. separate sends)</li>
-                  <li>Preview before irreversible print/run</li>
-                </ul>
-              </div>
-              <div className="card">
-                <h3>Exports &amp; payroll</h3>
-                <ul>
-                  <li>One Excel sheet for CPA with city &amp; state</li>
-                  <li>Piecework payroll auto-export</li>
-                  <li>Alloy file input, banking reconcile</li>
+                  <li>Autopay reminders and credit-limit → COD rules</li>
                   <li>Ctrl+Z / undo for finance corrections</li>
+                </ul>
+              </div>
+              <div className="card">
+                <h3>Reports, statements &amp; exports</h3>
+                <ul>
+                  <li>Aged balances clean and ready by the 20th</li>
+                  <li>Collections split: Private / PDS / Government</li>
+                  <li>Statements tailored per customer type</li>
+                  <li>CPA-ready Excel, payroll export, banking reconcile</li>
                 </ul>
               </div>
             </div>
@@ -336,44 +332,25 @@ export default function App() {
             <span className="badge">Production &amp; Technicians</span>
             <h2>Less chasing. More making.</h2>
             <p className="lead">
-              Technicians need scan info, due-date alerts, and clear status — without living
-              at a desktop that slows down the floor.
+              Scan info, due-date alerts, and clear status — without slowing down the floor.
             </p>
             <div className="grid-2">
               <div className="card">
-                <h3>Before work starts</h3>
+                <h3>Floor workflow</h3>
                 <ul>
-                  <li>Surface missing info that causes delays upfront</li>
-                  <li>Flag unusable scans with common problem types</li>
-                  <li>Auto-pull case details after scan</li>
-                  <li>Tech login for scan tracking &amp; efficiency eval</li>
-                </ul>
-              </div>
-              <div className="card">
-                <h3>During production</h3>
-                <ul>
-                  <li>Due-date notification right after scan</li>
-                  <li>Rescan / remill task without manual workarounds</li>
+                  <li>Flag missing info and bad scans before work starts</li>
+                  <li>Due-date alerts right after scan</li>
                   <li>Technician notes separate from dentist notes</li>
-                  <li>Task assignment by role, not verbal chaos</li>
+                  <li>Tasks assigned by role, not verbal handoffs</li>
                 </ul>
               </div>
               <div className="card">
-                <h3>Remakes &amp; status</h3>
+                <h3>Tracking &amp; outsourcing</h3>
                 <ul>
-                  <li>Clear case location &amp; replacement tracking</li>
-                  <li>Reduce remakes with better CS ↔ production comms</li>
-                  <li>Skip-stage option where workflow allows</li>
-                  <li>Open tasks auto-fix with correct dates</li>
-                </ul>
-              </div>
-              <div className="card">
-                <h3>Outsourcing (ADL)</h3>
-                <ul>
-                  <li>Replace email CAD sends with structured download</li>
-                  <li>Separate outsourcing lists</li>
-                  <li>Google Drive or direct portal integration</li>
-                  <li>Supplier list kept current &amp; easy to reference</li>
+                  <li>Case location and remake tracking built in</li>
+                  <li>Better CS ↔ production comms to cut remakes</li>
+                  <li>Structured CAD download instead of email sends</li>
+                  <li>Current supplier lists and portal integration</li>
                 </ul>
               </div>
             </div>
@@ -384,21 +361,19 @@ export default function App() {
           <div className="slide-inner">
             <span className="badge">Shipping</span>
             <h2>Labels, tracking, fewer mistakes.</h2>
-            <p className="lead">
-              Shipping shouldn’t mean re-typing addresses or hunting which case goes where.
-            </p>
+            <p className="lead">Right label, right address — no re-typing, no guessing.</p>
             <div className="grid-3">
               <div className="card">
                 <h3>UPS integration</h3>
-                <p>Link &amp; track with end-of-day upload. Tracking numbers visible to dental offices automatically.</p>
+                <p>End-of-day upload. Tracking shared with dental offices automatically.</p>
               </div>
               <div className="card">
                 <h3>Correct routing</h3>
-                <p>Cases labeled with the right customer address — fewer wrong shipments and manual fixes.</p>
+                <p>Cases labeled with the right customer address every time.</p>
               </div>
               <div className="card">
                 <h3>Driver reports</h3>
-                <p>Daily schedule reports kept for a few weeks — enough history without cluttering the system.</p>
+                <p>Daily schedules kept for a few weeks — useful history, no clutter.</p>
               </div>
             </div>
           </div>
@@ -407,10 +382,8 @@ export default function App() {
         <section id="features" className="slide">
           <div className="slide-inner">
             <span className="badge">Platform-wide</span>
-            <h2>Everything teams asked for — in one place.</h2>
-            <p className="lead">
-              These aren’t nice-to-haves. They came up again and again across departments.
-            </p>
+            <h2>What every team asked for</h2>
+            <p className="lead">Not extras — requirements that came up in every interview.</p>
             <div className="pill-list">
               <span className="pill">Auto-save</span>
               <span className="pill">Undo / Ctrl+Z</span>
@@ -419,16 +392,14 @@ export default function App() {
               <span className="pill">Doctor portals</span>
               <span className="pill">Internal messenger</span>
               <span className="pill">Smart notifications</span>
-              <span className="pill">Big secure storage</span>
+              <span className="pill">Secure storage</span>
               <span className="pill">Batch print tickets</span>
               <span className="pill">Urgent case priority</span>
-              <span className="pill">Warranty-based archive</span>
+              <span className="pill">Warranty archive</span>
               <span className="pill">Scan → auto case</span>
             </div>
-            <p className="quote" style={{ marginTop: 32 }}>
-              Teams were honest: adapting to a new system is a big change. But Evident’s
-              kick-outs, slowness, and rising fees mean the pain of staying is already real.
-              iDoc is built from how your people actually work.
+            <p className="quote" style={{ marginTop: 28 }}>
+              Change is hard — but Evident’s kick-outs, slowness, and rising fees already hurt. iDoc is built from how your people work.
             </p>
           </div>
         </section>
@@ -436,34 +407,32 @@ export default function App() {
         <section id="vision" className="slide slide-dark">
           <div className="slide-inner">
             <span className="badge">The vision</span>
-            <h2>iDoc: your lab’s operating system.</h2>
+            <h2>Your lab’s operating system</h2>
             <p className="lead">
-              Not a generic dental SaaS bill that grows every year. A platform you shape as
-              the industry, technology, and your business change.
+              Not a growing SaaS bill — a platform you shape as your business and technology change.
             </p>
             <div className="grid-2">
               <div className="card">
                 <h3>Customize today</h3>
-                <p>Solve the problems CS, Finance, Production, and Shipping described — not a vendor roadmap.</p>
+                <p>Fix what CS, Finance, Production, and Shipping raised — on your timeline.</p>
               </div>
               <div className="card">
                 <h3>Adapt tomorrow</h3>
-                <p>AI, new scan tools, tax policy, new customer types — change what you need, when you need it.</p>
+                <p>AI, scan tools, tax rules, new customer types — change what you need, when you need it.</p>
               </div>
             </div>
-            <div className="stat-row" style={{ marginTop: 40 }}>
+            <div className="stat-row" style={{ marginTop: 36 }}>
               <div className="stat">
                 <div className="stat-value success">~93%</div>
-                <div className="stat-label">Estimated monthly savings vs. Evident</div>
+                <div className="stat-label">Monthly savings vs. Evident</div>
               </div>
               <div className="stat">
                 <div className="stat-value">1</div>
                 <div className="stat-label">Platform for every department</div>
               </div>
             </div>
-            <p style={{ marginTop: 40, color: "rgba(255,255,255,0.9)", fontSize: "0.95rem" }}>
-              Built on Vercel + Supabase. Scan integration already in progress.
-              Ready to replace Evident piece by piece — on your terms.
+            <p className="closing-line">
+              Vercel + Supabase. Scan integration in progress. Replace Evident piece by piece — on your terms.
             </p>
           </div>
         </section>
