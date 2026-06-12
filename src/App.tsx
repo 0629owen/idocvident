@@ -1,4 +1,83 @@
 import { useEffect, useState } from "react";
+import OrgChart, { type OrgNode } from "./components/OrgChart";
+
+const EVIDENT_TREE: OrgNode = {
+  label: "Evident",
+  children: [
+    {
+      label: "Top Navigation",
+      children: [
+        { label: "Cases" },
+        { label: "Operations" },
+        { label: "Financials" },
+        { label: "Reports" },
+      ],
+    },
+  ],
+};
+
+const NAV_SECTIONS = ["Cases", "Operations", "Financials", "Reports"] as const;
+type NavSection = (typeof NAV_SECTIONS)[number];
+
+const SECTION_TOPICS: Record<NavSection, string[]> = {
+  Cases: [
+    "Customer File",
+    "Complaint File",
+    "Global Search",
+    "Case List / Find a Case",
+    "Case Problems",
+    "Scanner Upload",
+    "Customer Import",
+  ],
+  Operations: [
+    "Tickets",
+    "Day Sheets",
+    "Driver's Report",
+    "Shipping Schedule",
+    "Due to Arrive List",
+    "Try-In Cases",
+    "Held Cases",
+    "Daily Arrivals",
+  ],
+  Financials: [
+    "Activity Reports",
+    "Customer Activity",
+    "Product Activity",
+    "Diary Activity",
+    "Daily Activity",
+    "Period Activity",
+    "Up & Down Activity",
+    "Monthly Activity",
+    "Aged Balances",
+    "Debtor Letters",
+    "Tax Remittance",
+    "MDT Remittance",
+    "Credit Notes",
+    "Open Invoices",
+    "Invoices",
+    "Banking",
+    "Accounting Export",
+    "Receive Payments",
+  ],
+  Reports: [
+    "Customers",
+    "Customer Labels",
+    "Customer Letters",
+    "Customer List",
+    "Customer Export",
+    "Suspended Customers",
+    "Print Server",
+    "Exceptions List",
+    "Print Price List",
+    "Price Comparison",
+    "Product Sales",
+    "Remakes (External)",
+    "Document Email / Print Report",
+    "Last Case Date",
+    "Customer Special Pricing",
+    "PDS Monthly Report",
+  ],
+};
 
 const SECTIONS = [
   { id: "hero", label: "Intro" },
@@ -10,10 +89,19 @@ const SECTIONS = [
   { id: "shipping", label: "Shipping" },
   { id: "features", label: "Features" },
   { id: "vision", label: "Vision" },
+  { id: "blank", label: "Evident" },
+  { id: "section-detail", label: "Topics" },
 ];
 
 export default function App() {
   const [active, setActive] = useState("hero");
+  const [selectedNavSection, setSelectedNavSection] = useState<NavSection>("Cases");
+
+  const handleNavSectionClick = (label: string) => {
+    if (!NAV_SECTIONS.includes(label as NavSection)) return;
+    setSelectedNavSection(label as NavSection);
+    document.getElementById("section-detail")?.scrollIntoView({ behavior: "smooth" });
+  };
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -55,8 +143,8 @@ export default function App() {
             <span className="badge">Internal proposal</span>
             <h1>Replace Evident.<br />Build what your lab actually needs.</h1>
             <p className="lead">
-              A custom dental lab platform shaped by real feedback from Customer Service,
-              Finance, Production, and Shipping — not a one-size-fits-all vendor contract.
+              A custom dental lab platform shaped to streamline workflows, cut operating
+              costs, and improve overall efficiency across your entire operation.
             </p>
             <div className="pill-list">
               <span className="pill">Lower monthly cost</span>
@@ -126,8 +214,12 @@ export default function App() {
             </p>
             <div className="stat-row">
               <div className="stat">
-                <div className="stat-value">~$1,500</div>
-                <div className="stat-label">Evident today / month + extras (e.g. smart scan)</div>
+                <div className="stat-value warning">$1,500+</div>
+                <div className="stat-label">Evident base cost / month + extras</div>
+              </div>
+              <div className="stat">
+                <div className="stat-value warning">Up to $2,000</div>
+                <div className="stat-label">With Evident’s photo AI feature added</div>
               </div>
               <div className="stat">
                 <div className="stat-value success">~$100</div>
@@ -375,6 +467,55 @@ export default function App() {
             </p>
           </div>
         </section>
+
+        <section id="blank" className="slide slide-alt slide-tree" aria-label="Evident site tree">
+          <div className="slide-inner slide-inner-full">
+            <span className="badge">Evident structure</span>
+            <h2>Cite Tree</h2>
+            <p className="tree-hint">Click a section to view its pages</p>
+            <div className="org-chart-container org-chart-container--nav">
+              <OrgChart
+                {...EVIDENT_TREE}
+                large
+                clickableLabels={[...NAV_SECTIONS]}
+                onLabelClick={handleNavSectionClick}
+              />
+            </div>
+          </div>
+        </section>
+
+        <section id="section-detail" className="slide slide-alt slide-tree" aria-label="Section topics">
+          <div className="slide-inner slide-inner-full">
+            <span className="badge">Evident structure</span>
+            <h2>{selectedNavSection}</h2>
+            <p className="tree-hint">
+              Pages under {selectedNavSection} —{" "}
+              <a href="#blank" className="back-link">
+                back to navigation
+              </a>
+            </p>
+            <div className="topic-grid">
+              {SECTION_TOPICS[selectedNavSection].map((topic) => (
+                <div key={topic} className="topic-box">
+                  {topic}
+                </div>
+              ))}
+            </div>
+            <div className="section-tabs">
+              {NAV_SECTIONS.map((section) => (
+                <button
+                  key={section}
+                  type="button"
+                  className={`section-tab${selectedNavSection === section ? " active" : ""}`}
+                  onClick={() => setSelectedNavSection(section)}
+                >
+                  {section}
+                </button>
+              ))}
+            </div>
+          </div>
+        </section>
+
       </main>
     </>
   );
