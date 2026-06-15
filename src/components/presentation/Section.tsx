@@ -94,6 +94,65 @@ export function BulletList({ items }: { items: readonly string[] }) {
   );
 }
 
+export function CardGrid({
+  cards,
+}: {
+  cards: readonly {
+    title: string;
+    items?: readonly string[];
+    body?: string;
+  }[];
+}) {
+  return (
+    <div className="grid gap-6 sm:grid-cols-2">
+      {cards.map((card) => (
+        <div
+          key={card.title}
+          className="rounded-xl border border-lab-green-100 bg-white p-6 shadow-sm"
+        >
+          <h3 className="text-lg font-semibold text-foreground">{card.title}</h3>
+          {card.body && (
+            <p className="mt-3 leading-relaxed text-lab-muted">{card.body}</p>
+          )}
+          {card.items && (
+            <ul className="mt-4 space-y-2">
+              {card.items.map((item) => (
+                <li key={item} className="flex gap-2 text-sm leading-relaxed text-foreground">
+                  <span className="text-lab-green-600">•</span>
+                  {item}
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
+      ))}
+    </div>
+  );
+}
+
+export function PillList({ items }: { items: readonly string[] }) {
+  return (
+    <div className="flex flex-wrap gap-3">
+      {items.map((item) => (
+        <span
+          key={item}
+          className="rounded-full border border-lab-green-100 bg-lab-green-50 px-4 py-2 text-sm font-medium text-lab-green-700"
+        >
+          {item}
+        </span>
+      ))}
+    </div>
+  );
+}
+
+export function Quote({ children }: { children: React.ReactNode }) {
+  return (
+    <blockquote className="mt-8 border-l-4 border-lab-green-600 pl-6 text-lg font-medium leading-relaxed text-foreground italic">
+      {children}
+    </blockquote>
+  );
+}
+
 export function PresentationFooter() {
   const { labName, productName } = presentationContent;
 

@@ -1,11 +1,13 @@
 import Link from "next/link";
+import { EvidentTreeSection } from "@/components/presentation/EvidentTreeSection";
 import { PresentationHeader } from "@/components/presentation/PresentationHeader";
 import {
-  BulletList,
+  CardGrid,
+  PillList,
   PresentationFooter,
+  Quote,
   Section,
   SectionHeading,
-  StatCard,
 } from "@/components/presentation/Section";
 import { presentationContent } from "@/lib/presentation-content";
 
@@ -22,16 +24,18 @@ export default function Home() {
             <p className="mb-4 inline-flex rounded-full bg-lab-green-50 px-4 py-1.5 text-sm font-medium text-lab-green-700">
               {content.labName} · Presented by {content.presenter}
             </p>
-            <h1 className="text-4xl font-semibold tracking-tight text-foreground sm:text-5xl lg:text-6xl">
+            <h1 className="whitespace-pre-line text-4xl font-semibold tracking-tight text-foreground sm:text-5xl lg:text-6xl">
               {content.hero.title}
             </h1>
             <p className="mt-6 text-xl leading-relaxed text-lab-muted sm:text-2xl">
               {content.hero.subtitle}
             </p>
-            <p className="mt-4 text-lg text-lab-green-600">{content.tagline}</p>
+            <div className="mt-8">
+              <PillList items={content.hero.pills} />
+            </div>
             <div className="mt-10 flex flex-wrap gap-4">
               <Link
-                href="#savings"
+                href="#cost"
                 className="inline-flex items-center rounded-full bg-lab-green-600 px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-lab-green-700"
               >
                 See the savings
@@ -50,42 +54,112 @@ export default function Home() {
           <SectionHeading
             eyebrow="The problem"
             title={content.problem.title}
-            description="Evident has served us, but the cost and lack of control are holding IDOC back."
+            description={content.problem.lead}
           />
-          <BulletList items={content.problem.points} />
+          <CardGrid cards={content.problem.cards} />
         </Section>
 
-        <Section id="savings" className="bg-white">
-          <SectionHeading eyebrow="Today" title={content.savings.title} />
-          <div className="grid gap-8 lg:grid-cols-2">
-            <StatCard
-              label={content.savings.title}
-              amount={content.savings.amount}
-              period={content.savings.period}
-              description={content.savings.description}
-            />
-            <StatCard
-              label={content.futureCost.title}
-              amount={content.futureCost.amount}
-              period={content.futureCost.period}
-              highlight={content.futureCost.feature}
-              description={content.futureCost.description}
-            />
+        <Section id="cost" className="bg-white">
+          <SectionHeading
+            eyebrow="Cost benefit"
+            title={content.savings.title}
+            description={content.savings.lead}
+          />
+          <div className="grid gap-6 sm:grid-cols-3">
+            {content.savings.stats.map((stat) => (
+              <div
+                key={stat.label}
+                className="rounded-xl border border-lab-green-100 bg-lab-green-50/50 p-6 text-center"
+              >
+                <p
+                  className={`text-3xl font-semibold ${
+                    stat.tone === "success"
+                      ? "text-lab-green-700"
+                      : "text-amber-700"
+                  }`}
+                >
+                  {stat.amount}
+                </p>
+                <p className="mt-2 text-sm leading-relaxed text-lab-muted">
+                  {stat.label}
+                </p>
+              </div>
+            ))}
           </div>
+          <Quote>{content.savings.quote}</Quote>
           <p className="mt-8 rounded-xl bg-lab-green-50 px-6 py-4 text-center text-lg font-medium text-lab-green-700">
-            Combined: roughly{" "}
-            <span className="font-semibold text-lab-green-700">~$3,500/month</span>{" "}
-            in recurring costs we can avoid or eliminate
+            {content.savings.combinedNote}
           </p>
         </Section>
 
-        <Section id="vision" className="bg-lab-green-50">
+        {content.departments.map((dept) => (
+          <Section
+            key={dept.id}
+            id={dept.id}
+            className={dept.altBackground ? "bg-lab-green-50" : "bg-white"}
+          >
+            <SectionHeading
+              eyebrow={dept.eyebrow}
+              title={dept.title}
+              description={dept.lead}
+            />
+            <CardGrid cards={dept.cards} />
+          </Section>
+        ))}
+
+        <Section id="features" className="bg-white">
           <SectionHeading
-            eyebrow={content.productName}
-            title={content.vision.title}
-            description={`${content.productName} is not a copy of Evident — it's a system shaped by how ${content.labName} actually runs.`}
+            eyebrow="Platform-wide"
+            title={content.features.title}
+            description={content.features.lead}
           />
-          <BulletList items={content.vision.points} />
+          <PillList items={content.features.pills} />
+          <Quote>{content.features.quote}</Quote>
+        </Section>
+
+        <Section id="vision" className="bg-lab-green-600 text-white">
+          <div className="max-w-2xl">
+            <p className="mb-3 text-sm font-semibold uppercase tracking-widest text-lab-green-100">
+              The vision
+            </p>
+            <h2 className="text-3xl font-semibold tracking-tight sm:text-4xl">
+              {content.vision.title}
+            </h2>
+            <p className="mt-4 text-lg leading-relaxed text-lab-green-50">
+              {content.vision.lead}
+            </p>
+          </div>
+          <div className="mt-10 grid gap-6 sm:grid-cols-2">
+            {content.vision.cards.map((card) => (
+              <div
+                key={card.title}
+                className="rounded-xl border border-white/20 bg-white/10 p-6"
+              >
+                <h3 className="text-lg font-semibold">{card.title}</h3>
+                <p className="mt-3 leading-relaxed text-lab-green-50">
+                  {card.body}
+                </p>
+              </div>
+            ))}
+          </div>
+          <div className="mt-10 grid gap-6 sm:grid-cols-2">
+            {content.vision.stats.map((stat) => (
+              <div key={stat.label} className="text-center">
+                <p className="text-4xl font-semibold">{stat.amount}</p>
+                <p className="mt-2 text-sm text-lab-green-100">{stat.label}</p>
+              </div>
+            ))}
+          </div>
+          <p className="mt-10 text-lab-green-50">{content.vision.footer}</p>
+        </Section>
+
+        <Section id="evident-tree" className="bg-lab-green-50">
+          <SectionHeading
+            eyebrow="Evident structure"
+            title="Cite Tree"
+            description="What Evident exposes today — mapped from IDOC's menu."
+          />
+          <EvidentTreeSection />
         </Section>
 
         <Section id="next-steps" className="bg-white">
@@ -108,9 +182,7 @@ export default function Home() {
               </li>
             ))}
           </ol>
-          <blockquote className="mt-12 border-l-4 border-lab-green-600 pl-6 text-xl font-medium leading-relaxed text-foreground sm:text-2xl">
-            {content.nextSteps.closing}
-          </blockquote>
+          <Quote>{content.nextSteps.closing}</Quote>
         </Section>
       </main>
 

@@ -2,9 +2,10 @@ import Link from "next/link";
 import { presentationContent } from "@/lib/presentation-content";
 
 const navLinks = [
-  { href: "#why", label: "Why change" },
-  { href: "#savings", label: "Savings" },
-  { href: "#vision", label: "Our system" },
+  { href: "#why", label: "Problem" },
+  { href: "#cost", label: "Cost" },
+  { href: "#cs", label: "Departments" },
+  { href: "#evident-tree", label: "Evident" },
   { href: "#next-steps", label: "Next steps" },
 ];
 
