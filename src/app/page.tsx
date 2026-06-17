@@ -1,7 +1,6 @@
-import Link from "next/link";
-import { EvidentTreeSection } from "@/components/presentation/EvidentTreeSection";
 import { PresentationHeader } from "@/components/presentation/PresentationHeader";
 import {
+  BulletList,
   CardGrid,
   PillList,
   PresentationFooter,
@@ -33,63 +32,42 @@ export default function Home() {
             <div className="mt-8">
               <PillList items={content.hero.pills} />
             </div>
-            <div className="mt-10 flex flex-wrap gap-4">
-              <Link
-                href="#cost"
-                className="inline-flex items-center rounded-full bg-lab-green-600 px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-lab-green-700"
-              >
-                See the savings
-              </Link>
-              <Link
-                href="#why"
-                className="inline-flex items-center rounded-full border border-lab-green-100 px-6 py-3 text-sm font-semibold text-lab-green-700 transition-colors hover:bg-lab-green-50"
-              >
-                Why we&apos;re changing
-              </Link>
-            </div>
           </div>
         </Section>
 
+        {/* 1 · Why Evident is bad & how it affects IDOC */}
         <Section id="why" className="bg-lab-green-50">
           <SectionHeading
-            eyebrow="The problem"
+            eyebrow={content.problem.eyebrow}
             title={content.problem.title}
             description={content.problem.lead}
           />
           <CardGrid cards={content.problem.cards} />
+          <div className="mt-10 rounded-xl border border-lab-green-200 bg-white p-6 shadow-sm">
+            <h3 className="text-lg font-semibold text-foreground">
+              {content.problem.impact.title}
+            </h3>
+            <ul className="mt-4 space-y-2">
+              {content.problem.impact.items.map((item) => (
+                <li
+                  key={item}
+                  className="flex gap-2 text-sm leading-relaxed text-foreground"
+                >
+                  <span className="text-lab-green-600">•</span>
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </div>
         </Section>
 
-        <Section id="cost" className="bg-white">
+        {/* 2 · What we are going to do */}
+        <Section id="what" className="bg-white">
           <SectionHeading
-            eyebrow="Cost benefit"
-            title={content.savings.title}
-            description={content.savings.lead}
+            eyebrow={content.whatWeWillDo.eyebrow}
+            title={content.whatWeWillDo.title}
+            description={content.whatWeWillDo.lead}
           />
-          <div className="grid gap-6 sm:grid-cols-3">
-            {content.savings.stats.map((stat) => (
-              <div
-                key={stat.label}
-                className="rounded-xl border border-lab-green-100 bg-lab-green-50/50 p-6 text-center"
-              >
-                <p
-                  className={`text-3xl font-semibold ${
-                    stat.tone === "success"
-                      ? "text-lab-green-700"
-                      : "text-amber-700"
-                  }`}
-                >
-                  {stat.amount}
-                </p>
-                <p className="mt-2 text-sm leading-relaxed text-lab-muted">
-                  {stat.label}
-                </p>
-              </div>
-            ))}
-          </div>
-          <Quote>{content.savings.quote}</Quote>
-          <p className="mt-8 rounded-xl bg-lab-green-50 px-6 py-4 text-center text-lg font-medium text-lab-green-700">
-            {content.savings.combinedNote}
-          </p>
         </Section>
 
         {content.departments.map((dept) => (
@@ -107,78 +85,133 @@ export default function Home() {
           </Section>
         ))}
 
-        <Section id="features" className="bg-white">
+        <Section className="bg-white">
           <SectionHeading
-            eyebrow="Platform-wide"
+            eyebrow="Cross-team"
             title={content.features.title}
             description={content.features.lead}
           />
           <PillList items={content.features.pills} />
-          <Quote>{content.features.quote}</Quote>
         </Section>
 
-        <Section id="vision" className="bg-lab-green-600 text-white">
-          <div className="max-w-2xl">
+        {/* 3 · How we are going to do it */}
+        <Section id="approach" className="bg-lab-green-50">
+          <SectionHeading
+            eyebrow={content.approach.eyebrow}
+            title={content.approach.title}
+            description={content.approach.lead}
+          />
+          <CardGrid cards={content.approach.cards} />
+          <Quote>{content.approach.quote}</Quote>
+        </Section>
+
+        {/* 4 · Benefits: time & money */}
+        <Section id="benefits" className="bg-white">
+          <SectionHeading
+            eyebrow={content.benefits.eyebrow}
+            title={content.benefits.title}
+            description={content.benefits.lead}
+          />
+          <div className="grid gap-10 lg:grid-cols-2">
+            <div className="rounded-xl border border-lab-green-100 bg-lab-green-50/50 p-6">
+              <h3 className="text-xl font-semibold text-foreground">
+                {content.benefits.time.title}
+              </h3>
+              <div className="mt-6">
+                <BulletList items={content.benefits.time.items} />
+              </div>
+            </div>
+            <div className="rounded-xl border border-lab-green-100 bg-white p-6 shadow-sm">
+              <h3 className="text-xl font-semibold text-foreground">
+                {content.benefits.money.title}
+              </h3>
+              <div className="mt-6 grid gap-4">
+                {content.benefits.money.stats.map((stat) => (
+                  <div
+                    key={stat.label}
+                    className="rounded-lg border border-lab-green-100 bg-lab-green-50/50 p-4 text-center"
+                  >
+                    <p
+                      className={`text-2xl font-semibold ${
+                        stat.tone === "success"
+                          ? "text-lab-green-700"
+                          : "text-amber-700"
+                      }`}
+                    >
+                      {stat.amount}
+                    </p>
+                    <p className="mt-1 text-sm leading-relaxed text-lab-muted">
+                      {stat.label}
+                    </p>
+                  </div>
+                ))}
+              </div>
+              <Quote>{content.benefits.money.quote}</Quote>
+              <p className="mt-4 rounded-lg bg-lab-green-50 px-4 py-3 text-center text-sm font-medium text-lab-green-700">
+                {content.benefits.money.combinedNote}
+              </p>
+              <p className="mt-4 text-center text-base font-semibold text-lab-green-700">
+                {content.benefits.money.highlight}
+              </p>
+            </div>
+          </div>
+        </Section>
+
+        {/* 5 · Ask for engagement */}
+        <Section id="engage" className="bg-lab-green-600 text-white">
+          <div className="mb-10 max-w-2xl">
             <p className="mb-3 text-sm font-semibold uppercase tracking-widest text-lab-green-100">
-              The vision
+              {content.engagement.eyebrow}
             </p>
             <h2 className="text-3xl font-semibold tracking-tight sm:text-4xl">
-              {content.vision.title}
+              {content.engagement.title}
             </h2>
             <p className="mt-4 text-lg leading-relaxed text-lab-green-50">
-              {content.vision.lead}
+              {content.engagement.lead}
             </p>
           </div>
-          <div className="mt-10 grid gap-6 sm:grid-cols-2">
-            {content.vision.cards.map((card) => (
+          <div className="grid gap-6 sm:grid-cols-2">
+            {content.engagement.asks.map((ask) => (
               <div
-                key={card.title}
+                key={ask.title}
                 className="rounded-xl border border-white/20 bg-white/10 p-6"
               >
-                <h3 className="text-lg font-semibold">{card.title}</h3>
+                <h3 className="text-lg font-semibold">{ask.title}</h3>
                 <p className="mt-3 leading-relaxed text-lab-green-50">
-                  {card.body}
+                  {ask.body}
                 </p>
               </div>
             ))}
           </div>
-          <div className="mt-10 grid gap-6 sm:grid-cols-2">
-            {content.vision.stats.map((stat) => (
-              <div key={stat.label} className="text-center">
-                <p className="text-4xl font-semibold">{stat.amount}</p>
-                <p className="mt-2 text-sm text-lab-green-100">{stat.label}</p>
-              </div>
-            ))}
-          </div>
-          <p className="mt-10 text-lab-green-50">{content.vision.footer}</p>
+          <blockquote className="mt-10 border-l-4 border-white/40 pl-6 text-lg font-medium leading-relaxed text-lab-green-50 italic">
+            {content.engagement.closing}
+          </blockquote>
         </Section>
 
-        <Section id="evident-tree" className="bg-lab-green-50">
+        {/* 6 · Timeline & conclusion */}
+        <Section id="timeline" className="bg-white">
           <SectionHeading
-            eyebrow="Evident structure"
-            title="Cite Tree"
-            description="What Evident exposes today — mapped from IDOC's menu."
-          />
-          <EvidentTreeSection />
-        </Section>
-
-        <Section id="next-steps" className="bg-white">
-          <SectionHeading
-            eyebrow="Moving forward"
+            eyebrow={content.nextSteps.eyebrow}
             title={content.nextSteps.title}
+            description={content.nextSteps.lead}
           />
           <ol className="space-y-4">
             {content.nextSteps.steps.map((step, index) => (
               <li
-                key={step}
+                key={step.text}
                 className="flex gap-4 rounded-xl border border-lab-green-100 bg-lab-green-50/50 p-5"
               >
                 <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-lab-green-600 text-sm font-semibold text-white">
                   {index + 1}
                 </span>
-                <span className="pt-1 text-lg leading-relaxed text-foreground">
-                  {step}
-                </span>
+                <div className="pt-0.5">
+                  <p className="text-sm font-semibold text-lab-green-700">
+                    {step.target}
+                  </p>
+                  <p className="mt-1 text-lg leading-relaxed text-foreground">
+                    {step.text}
+                  </p>
+                </div>
               </li>
             ))}
           </ol>
