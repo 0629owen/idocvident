@@ -3,8 +3,10 @@
 import { useEffect, useState } from "react";
 import { PRESENTATION_SECTIONS } from "@/lib/presentation-sections";
 
+type SectionId = (typeof PRESENTATION_SECTIONS)[number]["id"];
+
 export function SlideNavigation() {
-  const [activeId, setActiveId] = useState(PRESENTATION_SECTIONS[0].id);
+  const [activeId, setActiveId] = useState<SectionId>(PRESENTATION_SECTIONS[0].id);
 
   const activeIndex = PRESENTATION_SECTIONS.findIndex(({ id }) => id === activeId);
 
@@ -20,8 +22,8 @@ export function SlideNavigation() {
         const visible = entries
           .filter((entry) => entry.isIntersecting)
           .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
-        if (visible?.target.id) {
-          setActiveId(visible.target.id);
+        if (visible?.target.id && PRESENTATION_SECTIONS.some((s) => s.id === visible.target.id)) {
+          setActiveId(visible.target.id as SectionId);
         }
       },
       { threshold: [0.15, 0.35, 0.55] },
