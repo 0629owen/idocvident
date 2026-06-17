@@ -36,7 +36,7 @@ export const presentationContent = {
   },
 
   problem: {
-    eyebrow: "1 · Why change",
+    eyebrow: "2 · Why change",
     title: "Evident gets in the way — and IDOC pays for it",
     lead: "Evident is slow, rigid, and built for a desk — not how CS or production actually work.",
     impact: {
@@ -75,7 +75,7 @@ export const presentationContent = {
         title: "Wrong fit for IDOC",
         items: [
           "Workflows forced into Evident’s menus and stuck stages",
-          "Finance mostly works — CS and production carry the pain",
+          "Evident and iDoc cannot integrate — every parallel phase needs manual handoffs",
           "Features we don’t use still cost us every month",
         ],
       },
@@ -83,13 +83,13 @@ export const presentationContent = {
   },
 
   whatWeWillDo: {
-    eyebrow: "2 · What we will do",
+    eyebrow: "3 · What we will do",
     title: "Build iDocvident around how our teams actually work",
     lead: "Keep what works. Fix the gaps that cost time every day.",
   },
 
   approach: {
-    eyebrow: "3 · How we will do it",
+    eyebrow: "4 · How we will do it",
     title: "Owen and Caleb build with Cursor",
     lead: "Not a vendor roadmap — Owen and Caleb ship prototypes with Cursor, then pilot with real workflows.",
     cards: [
@@ -103,7 +103,7 @@ export const presentationContent = {
       {
         title: "How we roll out",
         items: [
-          "Interviews first — then CS intake, running in parallel with Evident",
+          "Interviews first — CS intake in parallel with Evident, then other departments",
           "Production and shipping follow once CS proves the model",
         ],
       },
@@ -114,7 +114,7 @@ export const presentationContent = {
   },
 
   benefits: {
-    eyebrow: "4 · Benefits",
+    eyebrow: "5 · Benefits",
     title: "Time saved and money kept",
     lead: "iDocvident pays off in hours back on the floor and dollars off the monthly bill.",
     time: {
@@ -155,7 +155,7 @@ export const presentationContent = {
   },
 
   engagement: {
-    eyebrow: "5 · We need you",
+    eyebrow: "6 · We need you",
     title: "Team leaders — help us build this right",
     lead: "This only works if department leads engage now. We are asking for cooperation in this meeting and through the pilot — not passive approval.",
     asks: [
@@ -277,14 +277,14 @@ export const presentationContent = {
     {
       id: "finance",
       eyebrow: "Finance",
-      title: "Keep what works. A few targeted improvements.",
-      lead: "Most finance stays in Evident through the pilot. Two fixes when we move it later.",
+      title: "Keep what works. Transfer later.",
+      lead: "Finance is not staying on Evident forever — it may move to iDoc in a later rollout phase. Evident and iDoc cannot integrate, so any overlap means manual handoffs until cutover.",
       cards: [
         {
           title: "Keeping what works",
           items: [
             "Payments, aged balances, statements, and monthly reporting as today",
-            "CPA export, payroll, and banking reconcile unchanged",
+            "CPA export, payroll, and banking reconcile carried over when we transfer",
           ],
         },
         {
@@ -295,8 +295,11 @@ export const presentationContent = {
           ],
         },
         {
-          title: "During the pilot",
-          items: ["Finance stays in Evident until CS and production prove iDoc"],
+          title: "Rollout timing",
+          items: [
+            "CS and production first — finance may transfer once those phases prove out",
+            "No Evident API — finance and iDoc run separately until we move billing over",
+          ],
         },
       ],
     },
@@ -308,8 +311,30 @@ export const presentationContent = {
     pills: ["Auto-save", "Undo / Ctrl+Z"],
   },
 
+  vision: {
+    eyebrow: "3 · The vision",
+    title: "iDoc: our lab’s operating system.",
+    lead: "Not a generic dental SaaS bill that grows every year. A platform we shape as our business and technology change.",
+    cards: [
+      {
+        title: "Customize today",
+        body: "Solve what CS, Production, and Shipping raised first — finance transfers later as rollout expands. Evident and iDoc never integrate.",
+      },
+      {
+        title: "Adapt tomorrow",
+        body: "AI, scan tools, tax policy, new customer types — change what we need, when we need it.",
+      },
+    ],
+    stats: [
+      { amount: "~93%", label: "Estimated monthly savings vs. Evident" },
+      { amount: "1", label: "Platform for every department" },
+    ],
+    footer:
+      "Built on Vercel + Supabase. Scan integration in progress. Replace Evident piece by piece — on our terms.",
+  },
+
   nextSteps: {
-    eyebrow: "6 · Timeline & conclusion",
+    eyebrow: "7 · Timeline & conclusion",
     title: "Phased rollout — Evident and iDocvident in parallel",
     lead: "Built on Vercel + Supabase. Scan integration already in progress. We replace Evident piece by piece — on our terms — not in one cutover.",
     steps: [
@@ -323,11 +348,11 @@ export const presentationContent = {
       },
       {
         target: "Sep 2 – Sep 26, 2026",
-        text: "Prototype launch with a small CS pilot — iDocvident runs separately alongside Evident. Evident has no integration API, so the two systems operate in parallel with manual handoffs where needed; billing, finance, and untouched workflows stay in Evident only.",
+        text: "Prototype launch with a small CS pilot — iDocvident runs separately alongside Evident. Evident has no integration API, so the two systems operate in parallel with manual handoffs where needed; finance may transfer in a later phase, not stay on Evident permanently.",
       },
       {
         target: "Sep 29 – Nov 7, 2026",
-        text: "Add production and shipping modules (scan tracking, due-date alerts, pan location) while the dual-system pilot continues.",
+        text: "Add production, shipping, and eventually finance modules while the dual-system pilot continues — each cutover is separate because Evident and iDoc cannot integrate.",
       },
       {
         target: "Nov 10, 2026 onward",

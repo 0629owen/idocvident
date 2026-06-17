@@ -1,0 +1,15 @@
+export const PRESENTATION_SECTIONS = [
+  { id: "hero", label: "Intro" },
+  { id: "why", label: "Why" },
+  { id: "vision", label: "Vision" },
+  { id: "what", label: "What" },
+  { id: "cs", label: "CS" },
+  { id: "production", label: "Production" },
+  { id: "shipping", label: "Shipping" },
+  { id: "finance", label: "Finance" },
+  { id: "features", label: "Features" },
+  { id: "approach", label: "How" },
+  { id: "benefits", label: "Benefits" },
+  { id: "engage", label: "Engage" },
+  { id: "timeline", label: "Timeline" },
+] as const;

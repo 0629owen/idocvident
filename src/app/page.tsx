@@ -1,4 +1,5 @@
 import { PresentationHeader } from "@/components/presentation/PresentationHeader";
+import { SlideNavigation } from "@/components/presentation/SlideNavigation";
 import {
   BulletList,
   CardGrid,
@@ -16,9 +17,11 @@ export default function Home() {
   return (
     <>
       <PresentationHeader />
+      <SlideNavigation />
 
       <main>
-        <Section className="bg-white pt-16 sm:pt-24">
+        {/* 1 · Intro (unnumbered in header nav) */}
+        <Section id="hero" className="bg-white pt-16 sm:pt-24">
           <div className="max-w-3xl">
             <p className="mb-4 inline-flex rounded-full bg-lab-green-50 px-4 py-1.5 text-sm font-medium text-lab-green-700">
               {content.labName} · Presented by {content.presenter}
@@ -35,7 +38,7 @@ export default function Home() {
           </div>
         </Section>
 
-        {/* 1 · Why Evident is bad & how it affects IDOC */}
+        {/* 2 · Why */}
         <Section id="why" className="bg-lab-green-50">
           <SectionHeading
             eyebrow={content.problem.eyebrow}
@@ -61,7 +64,46 @@ export default function Home() {
           </div>
         </Section>
 
-        {/* 2 · What we are going to do */}
+        {/* 3 · The vision (same section as What we will do) */}
+        <Section id="vision" className="bg-lab-green-600 text-white">
+          <div className="max-w-2xl">
+            <p className="mb-3 text-sm font-semibold uppercase tracking-widest text-lab-green-100">
+              {content.vision.eyebrow}
+            </p>
+            <h2 className="text-3xl font-semibold tracking-tight sm:text-4xl">
+              {content.vision.title}
+            </h2>
+            <p className="mt-4 text-lg leading-relaxed text-lab-green-50">
+              {content.vision.lead}
+            </p>
+          </div>
+          <div className="mt-10 grid gap-6 sm:grid-cols-2">
+            {content.vision.cards.map((card) => (
+              <div
+                key={card.title}
+                className="rounded-xl border border-white/20 bg-white/10 p-6"
+              >
+                <h3 className="text-lg font-semibold">{card.title}</h3>
+                <p className="mt-3 leading-relaxed text-lab-green-50">
+                  {card.body}
+                </p>
+              </div>
+            ))}
+          </div>
+          <div className="mt-10 grid gap-6 sm:grid-cols-2">
+            {content.vision.stats.map((stat) => (
+              <div key={stat.label} className="text-center">
+                <p className="text-4xl font-semibold">{stat.amount}</p>
+                <p className="mt-2 text-sm text-lab-green-100">{stat.label}</p>
+              </div>
+            ))}
+          </div>
+          <p className="mt-10 max-w-2xl text-lg leading-relaxed text-lab-green-50">
+            {content.vision.footer}
+          </p>
+        </Section>
+
+        {/* 3 · What we are going to do */}
         <Section id="what" className="bg-white">
           <SectionHeading
             eyebrow={content.whatWeWillDo.eyebrow}
@@ -85,7 +127,7 @@ export default function Home() {
           </Section>
         ))}
 
-        <Section className="bg-white">
+        <Section id="features" className="bg-white">
           <SectionHeading
             eyebrow="Cross-team"
             title={content.features.title}
@@ -94,7 +136,7 @@ export default function Home() {
           <PillList items={content.features.pills} />
         </Section>
 
-        {/* 3 · How we are going to do it */}
+        {/* 4 · How we are going to do it */}
         <Section id="approach" className="bg-lab-green-50">
           <SectionHeading
             eyebrow={content.approach.eyebrow}
@@ -108,7 +150,7 @@ export default function Home() {
           </p>
         </Section>
 
-        {/* 4 · Benefits: time & money */}
+        {/* 5 · Benefits: time & money */}
         <Section id="benefits" className="bg-white">
           <SectionHeading
             eyebrow={content.benefits.eyebrow}
@@ -160,7 +202,7 @@ export default function Home() {
           </div>
         </Section>
 
-        {/* 5 · Ask for engagement */}
+        {/* 6 · Ask for engagement */}
         <Section id="engage" className="bg-lab-green-600 text-white">
           <div className="mb-10 max-w-2xl">
             <p className="mb-3 text-sm font-semibold uppercase tracking-widest text-lab-green-100">
@@ -191,7 +233,7 @@ export default function Home() {
           </blockquote>
         </Section>
 
-        {/* 6 · Timeline & conclusion */}
+        {/* 7 · Timeline & conclusion */}
         <Section id="timeline" className="bg-white">
           <SectionHeading
             eyebrow={content.nextSteps.eyebrow}

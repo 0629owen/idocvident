@@ -2,12 +2,12 @@ import Link from "next/link";
 import { presentationContent } from "@/lib/presentation-content";
 
 const navLinks = [
-  { href: "#why", label: "1 · Why" },
-  { href: "#what", label: "2 · What" },
-  { href: "#approach", label: "3 · How" },
-  { href: "#benefits", label: "4 · Benefits" },
-  { href: "#engage", label: "5 · Engage" },
-  { href: "#timeline", label: "6 · Timeline" },
+  { href: "#why", label: "2 · Why" },
+  { href: "#vision", label: "3 · What" },
+  { href: "#approach", label: "4 · How" },
+  { href: "#benefits", label: "5 · Benefits" },
+  { href: "#engage", label: "6 · Engage" },
+  { href: "#timeline", label: "7 · Timeline" },
 ];
 
 export function PresentationHeader() {
@@ -25,7 +25,7 @@ export function PresentationHeader() {
             <p className="text-xs text-lab-muted">{productName}</p>
           </div>
         </div>
-        <nav className="hidden gap-4 lg:flex">
+        <nav className="hidden gap-3 xl:flex">
           {navLinks.map((link) => (
             <Link
               key={link.href}
