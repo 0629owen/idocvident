@@ -21,7 +21,7 @@ export type DepartmentSection = {
 export const presentationContent = {
   labName: "IDOC",
   productName: "iDocvident",
-  presenter: "Owen Jeung",
+  presenter: "Owen Jeung & Caleb Kim",
   tagline: "A lab-built system, designed for how we actually work",
 
   hero: {
