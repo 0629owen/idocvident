@@ -103,6 +103,9 @@ export default function Home() {
           />
           <CardGrid cards={content.approach.cards} />
           <Quote>{content.approach.quote}</Quote>
+          <p className="mt-2 pl-6 text-sm font-medium text-lab-muted">
+            — {content.approach.quoteAttribution}
+          </p>
         </Section>
 
         {/* 4 · Benefits: time & money */}
