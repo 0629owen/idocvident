@@ -154,15 +154,13 @@ export function Quote({ children }: { children: React.ReactNode }) {
 }
 
 export function PresentationFooter() {
-  const { labName, productName } = presentationContent;
+  const { labName } = presentationContent;
 
   return (
     <footer className="border-t border-lab-green-100 bg-lab-green-50 px-6 py-10">
       <div className="mx-auto flex max-w-5xl flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
         <p className="font-semibold text-foreground">{labName}</p>
-        <p className="text-sm text-lab-muted">
-          {productName} — internal presentation
-        </p>
+        <p className="text-sm text-lab-muted">Internal presentation</p>
       </div>
     </footer>
   );

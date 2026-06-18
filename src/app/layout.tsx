@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "IDOC — Replacing Evident",
   description:
-    "Presentation: why IDOC should replace Evident with iDocvident — cost savings and a system built for our lab.",
+    "Presentation: why IDOC should replace Evident — cost savings and a lab-built system for how we work.",
 };
 
 export default function RootLayout({

@@ -20,7 +20,6 @@ export type DepartmentSection = {
 
 export const presentationContent = {
   labName: "IDOC",
-  productName: "iDocvident",
   presenter: "Owen Jeung & Caleb Kim",
   tagline: "A lab-built system, designed for how we actually work",
 
@@ -84,7 +83,7 @@ export const presentationContent = {
 
   whatWeWillDo: {
     eyebrow: "3 · What we will do",
-    title: "Build iDocvident around how our teams actually work",
+    title: "Build around how our teams actually work",
     lead: "Keep what works. Fix the gaps that cost time every day.",
   },
 
@@ -108,22 +107,25 @@ export const presentationContent = {
         ],
       },
     ],
-    quote:
-      "Coding is no longer the hard part. Understanding the domain is. So the future of software may belong to people who know the work deeply and can now turn that knowledge into tools.",
-    quoteAttribution: "Boris Cherny, Head of Claude Code",
+  },
+
+  cherneyQuote: {
+    text: "Coding is no longer the hard part. Understanding the domain is. So the future of software may belong to people who know the work deeply and can now turn that knowledge into tools.",
+    attribution: "Boris Cherny, Head of Claude Code",
   },
 
   benefits: {
     eyebrow: "5 · Benefits",
     title: "Time saved and money kept",
-    lead: "iDocvident pays off in hours back on the floor and dollars off the monthly bill.",
+    lead: "Hours back on the floor and dollars off the monthly bill.",
     time: {
       title: "Time — workflow & modernization",
       items: [
         "Faster lab-slip entry and scan-linked cases",
         "Auto-save, undo, and case notes CS and production both see",
         "Less time hunting for pans — scan ties cases to trays",
-        "Alerts at shared scan stations — no personal desktop required",
+        "Bluetooth scanners on the floor — no desktop computer required",
+        "Mobile-friendly views where a shared screen isn’t practical",
         "Modern, fast UI — less waiting on a slow Evident page",
       ],
     },
@@ -198,7 +200,8 @@ export const presentationContent = {
           title: "Archive & pans",
           items: [
             "Five years active, then cold archive — still searchable",
-            "VA / BLK pans separate work — no gov/private portal split",
+            "VA / BLK pans separate work — not tied to a VA Long Beach contract clause",
+            "No outsourcing to foreign countries; alloy must be noble metal",
           ],
         },
         {
@@ -214,7 +217,7 @@ export const presentationContent = {
       id: "production",
       eyebrow: "Production & Technicians",
       title: "Less chasing. More making.",
-      lead: "Scan-first workflows for techs who know the bench, not the browser.",
+      lead: "Scan-first workflows — Bluetooth scanners and mobile views, not a desktop at every bench.",
       cards: [
         {
           title: "Keeping what works",
@@ -227,14 +230,14 @@ export const presentationContent = {
           title: "Easier on the floor",
           items: [
             "Barcode on the pan — scan the tray, not a work ticket",
-            "Simple scan screens — less navigation than Evident",
+            "Bluetooth scanner provided — no desktop computer at the bench",
+            "Mobile version of the program where a phone or tablet works better",
           ],
         },
         {
           title: "At the scan station",
           items: [
             "Due dates and flags show when someone scans",
-            "Lightweight case view at shared scan stations",
             "Rescan / remill without manual workarounds",
             "CS updates visible next time the case is opened",
           ],
@@ -335,7 +338,7 @@ export const presentationContent = {
 
   nextSteps: {
     eyebrow: "7 · Timeline & conclusion",
-    title: "Phased rollout — Evident and iDocvident in parallel",
+    title: "Phased rollout — Evident and the new program in parallel",
     lead: "Built on Vercel + Supabase. Scan integration already in progress. We replace Evident piece by piece — on our terms — not in one cutover.",
     steps: [
       {
@@ -348,7 +351,7 @@ export const presentationContent = {
       },
       {
         target: "Sep 2 – Sep 26, 2026",
-        text: "Prototype launch with a small CS pilot — iDocvident runs separately alongside Evident. Evident has no integration API, so the two systems operate in parallel with manual handoffs where needed; finance may transfer in a later phase, not stay on Evident permanently.",
+        text: "Prototype launch with a small CS pilot — the new program runs separately alongside Evident. Evident has no integration API, so the two systems operate in parallel with manual handoffs where needed; finance may transfer in a later phase, not stay on Evident permanently.",
       },
       {
         target: "Sep 29 – Nov 7, 2026",
@@ -361,5 +364,31 @@ export const presentationContent = {
     ] satisfies readonly NextStep[],
     closing:
       "The question isn't whether we can afford to build our own system — it's whether we can afford not to.",
+  },
+
+  nameVote: {
+    eyebrow: "Name the system",
+    title: "Vote on what we call it",
+    lead: "We are picking a name for the new program. Your preference counts.",
+    options: [
+      {
+        name: "IDOC CORE",
+        tagline: "Commitment, Ownership, Reliability, Excellence",
+      },
+      {
+        name: "NUCLEAR",
+        tagline: "No meaning — just sounded crazy",
+      },
+      {
+        name: "IDOC PULSE",
+        tagline: "People first, Unity, Leadership, Service, Excellence",
+      },
+    ],
+  },
+
+  feedback: {
+    title: "Questions or feedback?",
+    lead: "Reach out anytime as we build.",
+    emails: ["owenj@idocdentallab.com", "calebk@idocdentallab.com"],
   },
 } as const;

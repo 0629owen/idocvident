@@ -12,4 +12,5 @@ export const PRESENTATION_SECTIONS = [
   { id: "benefits", label: "Benefits" },
   { id: "engage", label: "Engage" },
   { id: "timeline", label: "Timeline" },
+  { id: "vote", label: "Vote" },
 ] as const;

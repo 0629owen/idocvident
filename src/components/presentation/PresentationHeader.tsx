@@ -11,7 +11,7 @@ const navLinks = [
 ];
 
 export function PresentationHeader() {
-  const { labName, productName } = presentationContent;
+  const { labName, tagline } = presentationContent;
 
   return (
     <header className="sticky top-0 z-50 border-b border-lab-green-100 bg-white/95 backdrop-blur-sm">
@@ -22,7 +22,7 @@ export function PresentationHeader() {
           </div>
           <div>
             <p className="text-sm font-semibold text-foreground">{labName}</p>
-            <p className="text-xs text-lab-muted">{productName}</p>
+            <p className="text-xs text-lab-muted">{tagline}</p>
           </div>
         </div>
         <nav className="hidden gap-3 xl:flex">

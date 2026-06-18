@@ -144,10 +144,6 @@ export default function Home() {
             description={content.approach.lead}
           />
           <CardGrid cards={content.approach.cards} />
-          <Quote>{content.approach.quote}</Quote>
-          <p className="mt-2 pl-6 text-sm font-medium text-lab-muted">
-            — {content.approach.quoteAttribution}
-          </p>
         </Section>
 
         {/* 5 · Benefits: time & money */}
@@ -200,6 +196,13 @@ export default function Home() {
               </p>
             </div>
           </div>
+        </Section>
+
+        <Section className="bg-lab-green-50">
+          <Quote>{content.cherneyQuote.text}</Quote>
+          <p className="mt-2 pl-6 text-sm font-medium text-lab-muted">
+            — {content.cherneyQuote.attribution}
+          </p>
         </Section>
 
         {/* 6 · Ask for engagement */}
@@ -261,6 +264,50 @@ export default function Home() {
             ))}
           </ol>
           <Quote>{content.nextSteps.closing}</Quote>
+        </Section>
+
+        <Section id="vote" className="bg-lab-green-50">
+          <SectionHeading
+            eyebrow={content.nameVote.eyebrow}
+            title={content.nameVote.title}
+            description={content.nameVote.lead}
+          />
+          <div className="grid gap-6 sm:grid-cols-3">
+            {content.nameVote.options.map((option) => (
+              <div
+                key={option.name}
+                className="rounded-xl border border-lab-green-200 bg-white p-6 text-center shadow-sm"
+              >
+                <p className="text-2xl font-semibold tracking-tight text-lab-green-700">
+                  {option.name}
+                </p>
+                <p className="mt-3 text-sm leading-relaxed text-lab-muted">
+                  {option.tagline}
+                </p>
+              </div>
+            ))}
+          </div>
+        </Section>
+
+        <Section className="bg-white pb-16">
+          <div className="mx-auto max-w-2xl text-center">
+            <h2 className="text-2xl font-semibold text-foreground">
+              {content.feedback.title}
+            </h2>
+            <p className="mt-3 text-lg text-lab-muted">{content.feedback.lead}</p>
+            <ul className="mt-6 space-y-2">
+              {content.feedback.emails.map((email) => (
+                <li key={email}>
+                  <a
+                    href={`mailto:${email}`}
+                    className="text-lg font-medium text-lab-green-700 hover:text-lab-green-600"
+                  >
+                    {email}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
         </Section>
       </main>
 
